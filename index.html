@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Price Tag Generator</title>
+    <style>
+        .container {
+            font-family: Arial;
+            font-weight: bold;
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        .price-tag {
+            width: 50%;
+            height: 74.25mm;
+            border: 1px solid #ccc;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .product-name {
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px;
+        }
+        .tag-content{
+            margin-top: 40px;
+            margin-inline: 20px;
+            border: 1px solid #ccc;
+            align-self: center;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .tag-title{
+            text-align: left;
+            width: 60%;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .tag-sub-content{
+            display: flex;
+        }
+        .tag-sub-sub-content{
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+        .title-price{
+            font-size: 12px;
+            width: 60%;
+            text-align: center;
+        }
+        .title-promotion{
+            font-size: 18px;
+            text-align: center;
+        }
+        .title-xlarge{
+            font-size: 50px;
+            text-align: center;
+        }
+        .price{
+            display: flex;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <h1>Price Tag Generator</h1>
+    <button onclick="generatePriceTags()">Generate Price Tags</button>
+    <div id="priceTagsContainer">
+        <!-- Etiquetas serão inseridas aqui -->
+    </div>
+
+    <script>
+        function generatePriceTags() {
+            var htmlContent = '';
+            var productName;
+            var price;
+
+            // Gera 8 etiquetas
+            htmlContent += '<main class="container">'
+            for (var i = 1; i <= 16; i++) {
+                productName = "Product " + i;
+                price = (Math.random() * 100).toFixed(2);
+
+                // Adiciona HTML para cada etiqueta
+                htmlContent += `
+                    <div class="price-tag">
+                        <div class="tag-content">
+                            
+                            <div class="tag-title">
+                                PRODUCT NAME inpurv d 50.000Ui 4 comp
+                            </div>
+
+                            
+                            <div class="tag-sub-content">
+                                <div class="tag-sub-sub-content title-promotion">
+                                    <p>50% DE DESCONTO NA SEGUNDA UNIDADE</p>
+                                    <p>R$ 49,04 UND</p>
+                                </div>
+
+
+                                <div class="tag-sub-sub-content">
+                                    <p class="title-price">Nesta promoção a unidade sai por:</p>
+                                    <div class="price">
+                                        <p class="title-large">R$</p>
+                                        <p class="title-xlarge">70,83</p>
+                                    </div>
+                                    <p>Preço do Combo: R$ 73,56</p>
+                                </div>  
+                            </div>
+
+                            
+                            <div>
+
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            htmlContent += '</main>'
+            // Adiciona etiquetas ao contêiner
+            document.getElementById("priceTagsContainer").innerHTML = htmlContent;
+
+            // Converte HTML para PDF
+            html2pdf().from(document.getElementById("priceTagsContainer")).save();
+        }
+    </script>
+</body>
+</html>
